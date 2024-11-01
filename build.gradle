@@ -61,15 +61,3 @@ tasks.withType(Test).configureEach {
         }
     }
 }
-
-tasks.register('reqres_tests', Test) {
-    useJUnitPlatform {
-        includeTags 'reqres'
-    }
-}
-
-tasks.register('bookstore_tests', Test) {
-    useJUnitPlatform {
-        includeTags 'bookstore'
-    }
-}

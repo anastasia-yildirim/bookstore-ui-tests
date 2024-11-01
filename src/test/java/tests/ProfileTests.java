@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Epic("")
 @Story("")
 @Feature("")
-public class BookStoreTests extends TestBase {
+public class ProfileTests extends TestBase {
 
     BookStoreApiSteps bookStoreApiSteps = new BookStoreApiSteps();
     BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
