@@ -51,7 +51,7 @@ public class ProfileTests extends TestBase {
         books = bookStoreApiSteps.addBookToProfile(collectionOfIsbns, session);
         assertEquals(collectionOfIsbns, books);
 
-        bookStoreUiSteps.openProfile();
+        bookStoreUiSteps.openProfilePage();
         bookStoreUiSteps.deleteBookFromProfile(isbn);
 
         //Assert
@@ -59,4 +59,14 @@ public class ProfileTests extends TestBase {
         books = bookStoreApiSteps.getBooksFromProfile(session);
         assertTrue(books.isEmpty());
     }
+
+    @Test
+    @DisplayName("Отображение текста для незалогиненного пользователя в профиле")
+    @Owner("@anastasiayildirim")
+    public void shouldShowNotLoggedInMessageWhenVisitingProfileWithoutLogin() {
+        bookStoreUiSteps.openProfilePage();
+        bookStoreUiSteps.checkNotLoggedInMessageIsDisplayed();
+    }
+
+
 }

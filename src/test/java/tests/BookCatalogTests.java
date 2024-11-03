@@ -1,4 +1,7 @@
 package tests;
 
-public class BookCatalogTests {
+import lombok.Data;
+
+@Data
+public class BookCatalogTests extends TestBase {
 }

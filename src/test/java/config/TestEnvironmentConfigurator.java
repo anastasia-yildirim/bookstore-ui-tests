@@ -10,22 +10,16 @@ import java.util.Map;
 
 public class TestEnvironmentConfigurator {
 
-    //public final Config config;
     @Getter
     private static final Config config = ConfigFactory.create(Config.class, System.getProperties());
 
     public TestEnvironmentConfigurator() {
-        //this.config = ConfigFactory.create(Config.class, System.getProperties());
         createWebDriver();
     }
 
     public void createWebDriver() {
         Configuration.baseUrl = config.getBaseUrl();
         RestAssured.baseURI = config.getBaseUrl();
-
-//        Configuration.browser = System.getProperty("browser");
-//        Configuration.browserVersion = System.getProperty("browserVersion");
-//        Configuration.browserSize = System.getProperty("browserSize");
 
         Configuration.browser = config.browserName();
         Configuration.browserVersion = config.browserVersion();
