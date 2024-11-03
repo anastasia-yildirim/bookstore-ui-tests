@@ -6,10 +6,8 @@ import pages.BookCatalogPage;
 import pages.LoginPage;
 import pages.ProfilePage;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BookStoreUiSteps {
@@ -30,9 +28,10 @@ public class BookStoreUiSteps {
         $("#closeSmallModal-ok").click();
     }
 
-    @Step("Убедиться, что отображается сообщение для незалогиненного пользователя")
-    public void checkNotLoggedInMessageIsDisplayed() {
-        profilePage.getNotLoggedInLabel().shouldHave(text(profilePage.getNotLoggedInText()));
+    @Step("Получить отображаемое сообщение для пользователя")
+    public String getNotLoggedInMessageDisplayed() {
+
+        return profilePage.getNotLoggedInLabel().getText();
     }
 
     @Step("Открыть страницу авторизации в UI")
@@ -67,11 +66,6 @@ public class BookStoreUiSteps {
         return loginPage.getValidationMessage().getText();
     }
 
-    @Step("Убедиться, что пользователь авторизован")
-    public void checkUserIsLoggedIn() {
-        assertThat(getDisplayedLogin()).isEqualTo(TestEnvironmentConfigurator.getConfig().login());
-    }
-
     @Step("Открыть страницу книжного каталога")
     public void openBookCatalogPage() {
         open("/books");
@@ -86,5 +80,12 @@ public class BookStoreUiSteps {
     public String getDisplayedPageTitle() {
 
         return loginPage.getPageTitle().getText();
+    }
+
+    @Step("Открыть страницу в новой вкладке")
+    public void openPageInAnotherTab (String pagePath) {
+        executeJavaScript("window.open('" + TestEnvironmentConfigurator.getConfig().getBaseUrl() + pagePath
+                + "', '_blank');");
+        switchTo().window(1);
     }
 }

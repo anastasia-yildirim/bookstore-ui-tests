@@ -11,6 +11,7 @@ import models.bookstore.BookModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import pages.ProfilePage;
 import steps.api.BookStoreApiSteps;
 import steps.ui.BookStoreUiSteps;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("bookstore")
 @Epic("")
@@ -29,6 +31,7 @@ public class ProfileTests extends TestBase {
 
     BookStoreApiSteps bookStoreApiSteps = new BookStoreApiSteps();
     BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
+    ProfilePage profilePage = new ProfilePage();
 
     @WithLogin
     @DisplayName("Удаление книги из профиля")
@@ -65,7 +68,7 @@ public class ProfileTests extends TestBase {
     @Owner("@anastasiayildirim")
     public void shouldShowNotLoggedInMessageWhenVisitingProfileWithoutLogin() {
         bookStoreUiSteps.openProfilePage();
-        bookStoreUiSteps.checkNotLoggedInMessageIsDisplayed();
+        assertThat(bookStoreUiSteps.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
     }
 
 

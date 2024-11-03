@@ -21,7 +21,7 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("Успешная авторизация")
     @Owner("@anastasiayildirim")
-    public void successfulLoggingIn() {
+    public void successfulLogin() {
         bookStoreUiSteps.openLoginPage();
         bookStoreUiSteps.enterUserName(TestEnvironmentConfigurator.getConfig().login());
         bookStoreUiSteps.enterPassword(TestEnvironmentConfigurator.getConfig().password());
@@ -32,7 +32,7 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("Неуспешная авторизация - неверный логин")
     @Owner("@anastasiayildirim")
-    public void unsuccessfulLoggingInWithInvalidUserName() {
+    public void unsuccessfulLoginWithInvalidUserName() {
         bookStoreUiSteps.openLoginPage();
         bookStoreUiSteps.enterUserName("invalid_login");
         bookStoreUiSteps.enterPassword(TestEnvironmentConfigurator.getConfig().password());
@@ -43,7 +43,7 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("Неуспешная авторизация - неверный пароль")
     @Owner("@anastasiayildirim")
-    public void unsuccessfulLoggingInWithInvalidPassword() {
+    public void unsuccessfulLoginWithInvalidPassword() {
         bookStoreUiSteps.openLoginPage();
         bookStoreUiSteps.enterUserName(TestEnvironmentConfigurator.getConfig().login());
         bookStoreUiSteps.enterPassword("invalid_password");
