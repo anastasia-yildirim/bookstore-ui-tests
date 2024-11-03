@@ -66,7 +66,7 @@ public class ProfileTests extends TestBase {
     @Test
     @DisplayName("Отображение текста для незалогиненного пользователя в профиле")
     @Owner("@anastasiayildirim")
-    public void shouldShowNotLoggedInMessageWhenVisitingProfileWithoutLogin() {
+    public void shouldShowNotLoggedInMessageWhenVisitingProfileWithoutLoginTest() {
         bookStoreUiSteps.openProfilePage();
         assertThat(bookStoreUiSteps.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
     }

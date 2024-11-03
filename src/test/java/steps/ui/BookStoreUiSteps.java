@@ -1,14 +1,18 @@
 package steps.ui;
 
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import config.TestEnvironmentConfigurator;
 import io.qameta.allure.Step;
 import pages.BookCatalogPage;
 import pages.LoginPage;
 import pages.ProfilePage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class BookStoreUiSteps {
 
@@ -83,9 +87,27 @@ public class BookStoreUiSteps {
     }
 
     @Step("Открыть страницу в новой вкладке")
-    public void openPageInAnotherTab (String pagePath) {
+    public void openPageInAnotherTab(String pagePath) {
         executeJavaScript("window.open('" + TestEnvironmentConfigurator.getConfig().getBaseUrl() + pagePath
                 + "', '_blank');");
         switchTo().window(1);
+    }
+
+    @Step("Отсортировать книги по нужному столбцу")
+    public void sortBookItemsBy(SelenideElement elementToSortBy) {
+        elementToSortBy.click();
+    }
+
+    @Step("Получить список всех значений в нужном столбце")
+    public List<String> getTextFromCells(ElementsCollection cells) {
+        List<String> textList = new ArrayList<>();
+        for (SelenideElement cell : cells) {
+            String cellText = cell.getText().trim();
+            if (!cellText.isEmpty()) {
+                textList.add(cellText);
+            }
+        }
+
+        return textList;
     }
 }
