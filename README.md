@@ -29,8 +29,7 @@ ____
 <a href="https://gradle.org/"><img src="images/logo/Gradle.svg" width="50" height="50"  alt="Gradle"/></a>  
 <a href="https://selenide.org/"><img src="images/logo/Selenide.svg" width="50" height="50"  alt="Selenide"/></a>  
 <a href="https://aerokube.com/selenoid/"><img src="images/logo/Selenoid.svg" width="50" height="50"  alt="Selenoid"/></a>  
-<a href="ht[images](images)tps://github.com/allure-framework/allure2"><img src="images/logo/Allure.svg" width="50" height="50"  alt="Allure"/></a> 
-<a href="https://qameta.io/"><img src="images/logo/Allure2.svg" width="50" height="50"  alt="Allure TestOps"/></a>   
+<a href="ht[images](images)tps://github.com/allure-framework/allure2"><img src="images/logo/Allure.svg" width="50" height="50"  alt="Allure"/></a>    
 <a href="https://www.jenkins.io/"><img src="images/logo/Jenkins.svg" width="50" height="50"  alt="Jenkins"/></a>  
 </p>
 
@@ -47,7 +46,7 @@ ____
 
 ____
 <a id="jenkins"></a>
-## <img alt="Jenkins" height="25" src="images/logo/Jenkins.svg" width="25"/></a><a name="Сборка"></a>Сборка в [Jenkins](https://jenkins.autotests.cloud/job/029-anastasia-yildirim-qa_guru_java-bookstore-ui-tests/)</a>
+## <img alt="Jenkins" height="25" src="images/logo/jenkins.svg" width="25"/></a><a name="Сборка"></a>Сборка в [Jenkins](https://jenkins.autotests.cloud/job/029-anastasia-yildirim-qa_guru_java-bookstore-ui-tests/)</a>
 ____
 <p align="center">  
 <a href="https://jenkins.autotests.cloud/job/029-anastasia-yildirim-qa_guru_java-bookstore-ui-tests/"><img src="images/screen/jenkins_build.png" alt="Jenkins" width="950"/></a>  
@@ -112,9 +111,9 @@ ___
 ### *Графики*
 
   <p align="center">  
-<img title="Allure Graphics" src="images/screen/allure_graths.bmp" width="850">
+<img title="Allure Graphics" src="images/screen/allure_graphs.bmp" width="850">
 
-<img title="Allure Graphics" src="images/screen/graphs.png" width="850">  
+<img title="Allure Graphics" src="images/screen/allure_graphs2.png" width="850">  
 </p>
 
 ____
