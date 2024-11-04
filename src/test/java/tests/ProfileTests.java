@@ -6,19 +6,18 @@ import io.qameta.allure.*;
 import models.Session;
 import models.bookstore.BookModel;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import pages.ProfilePage;
 import steps.api.BookStoreApiSteps;
 import steps.ui.BookStoreUiSteps;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-@Tag("profile")
 @Epic("Книжный магазин DemoQA")
 @Feature("Действия пользователя в профиле")
 @Story("Добавление книг в профиль и удаление книг из профиля")
@@ -26,6 +25,7 @@ public class ProfileTests extends TestBase {
 
     BookStoreApiSteps bookStoreApiSteps = new BookStoreApiSteps();
     BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
+    ProfilePage profilePage = new ProfilePage();
 
     @Test
     @WithLogin
@@ -38,23 +38,22 @@ public class ProfileTests extends TestBase {
         List<BookModel> books;
         String isbn;
         List<BookModel> collectionOfIsbns = new ArrayList<>();
-
         //Act
         bookStoreApiSteps.deleteAllBooksFromProfile(session);
         books = bookStoreApiSteps.getBooksFromStore();
         assertNotEquals(null, books);
-
         isbn = bookStoreApiSteps.selectRandomBook(books);
-        bookStoreApiSteps.addBookToIsbnCollection(isbn, collectionOfIsbns);
+        collectionOfIsbns = bookStoreApiSteps.addBookToIsbnCollection(isbn, collectionOfIsbns);
         books = bookStoreApiSteps.addBookToProfile(collectionOfIsbns, session);
         assertEquals(collectionOfIsbns, books);
-
-        bookStoreUiSteps.openProfilePage();
+        bookStoreUiSteps.openPage(profilePage.getPath());
         bookStoreUiSteps.deleteBookFromProfile(isbn);
-
+        sleep(1000);
         //Assert
-        $(".ReactTable").$("a[href='/profile?book=" + isbn + "']").shouldNot(exist);
+        Allure.step("Убедиться, что книга не отображается в интерфейсе");
+        assertThat(profilePage.getBookInProfile(isbn).isDisplayed()).isFalse();
         books = bookStoreApiSteps.getBooksFromProfile(session);
+        Allure.step("Убедиться, что список книг пустой");
         assertTrue(books.isEmpty());
     }
 }

@@ -11,6 +11,8 @@ import static com.codeborne.selenide.Selenide.$$;
 @Data
 public class BookCatalogPage {
 
+    private String path = "/books";
+
     private SelenideElement searchBox = $("#searchBox");
     private SelenideElement userNameValue = $("#userName-value");
     private SelenideElement logoutButton = $("#submit");

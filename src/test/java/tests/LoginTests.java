@@ -3,14 +3,12 @@ package tests;
 import config.TestEnvironmentConfigurator;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 import steps.ui.BookStoreUiSteps;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Tag("authorization")
 @Epic("Книжный магазин DemoQA")
 @Feature("Авторизация пользователя")
 @Story("Успешная и неуспешная авторизация")
@@ -24,10 +22,11 @@ public class LoginTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.BLOCKER)
     public void successfulLogin() {
-        bookStoreUiSteps.openLoginPage();
+        bookStoreUiSteps.openPage(loginPage.getPath());
         bookStoreUiSteps.enterUserName(TestEnvironmentConfigurator.getConfig().login());
         bookStoreUiSteps.enterPassword(TestEnvironmentConfigurator.getConfig().password());
         bookStoreUiSteps.clickLoginButton();
+        Allure.step("Убедиться, что пользователь успешно авторизовался");
         assertThat(bookStoreUiSteps.getDisplayedLogin()).isEqualTo(TestEnvironmentConfigurator.getConfig().login());
     }
 
@@ -36,10 +35,11 @@ public class LoginTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.CRITICAL)
     public void unsuccessfulLoginWithInvalidUserName() {
-        bookStoreUiSteps.openLoginPage();
+        bookStoreUiSteps.openPage(loginPage.getPath());
         bookStoreUiSteps.enterUserName("invalid_login");
         bookStoreUiSteps.enterPassword(TestEnvironmentConfigurator.getConfig().password());
         bookStoreUiSteps.clickLoginButton();
+        Allure.step("Убедиться, что отображается сообщение " + loginPage.getExpectedValidationMessage());
         assertThat(bookStoreUiSteps.getValidationMessageText()).isEqualTo(loginPage.getExpectedValidationMessage());
     }
 
@@ -48,10 +48,11 @@ public class LoginTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.CRITICAL)
     public void unsuccessfulLoginWithInvalidPassword() {
-        bookStoreUiSteps.openLoginPage();
+        bookStoreUiSteps.openPage(loginPage.getPath());
         bookStoreUiSteps.enterUserName(TestEnvironmentConfigurator.getConfig().login());
         bookStoreUiSteps.enterPassword("invalid_password");
         bookStoreUiSteps.clickLoginButton();
+        Allure.step("Убедиться, что отображается сообщение " + loginPage.getExpectedValidationMessage());
         assertThat(bookStoreUiSteps.getValidationMessageText()).isEqualTo(loginPage.getExpectedValidationMessage());
     }
 }

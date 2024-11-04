@@ -9,7 +9,9 @@ import pages.LoginPage;
 import pages.ProfilePage;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
@@ -20,9 +22,9 @@ public class BookStoreUiSteps {
     LoginPage loginPage = new LoginPage();
     BookCatalogPage bookCatalogPage = new BookCatalogPage();
 
-    @Step("Открыть профиль в UI")
-    public void openProfilePage() {
-        open("/profile");
+    @Step("Открыть страницу")
+    public void openPage(String pagePath) {
+        open(pagePath);
     }
 
     @Step("Удалить книгу из профиля")
@@ -36,11 +38,6 @@ public class BookStoreUiSteps {
     public String getNotLoggedInMessageDisplayed() {
 
         return profilePage.getNotLoggedInLabel().getText();
-    }
-
-    @Step("Открыть страницу авторизации в UI")
-    public void openLoginPage() {
-        open("/login");
     }
 
     @Step("Ввести логин")
@@ -70,14 +67,19 @@ public class BookStoreUiSteps {
         return loginPage.getValidationMessage().getText();
     }
 
-    @Step("Открыть страницу книжного каталога")
-    public void openBookCatalogPage() {
-        open("/books");
-    }
-
     @Step("Нажать на кнопку Logout")
     public void clickLogoutButton() {
         bookCatalogPage.getLogoutButton().click();
+    }
+
+    @Step("Перейти в другую вкладку")
+    public void switchToAnotherTab(int tabIndex) {
+        switchTo().window(tabIndex);
+    }
+
+    @Step("Перейти в профиль со страницы авторизации (пользователь авторизован)")
+    public void goToProfileFromLoginPageWhileLoggedIn() {
+        loginPage.getProfileLink().shouldBe(visible).click();
     }
 
     @Step("Получить название отобразившейся страницы")
@@ -87,10 +89,10 @@ public class BookStoreUiSteps {
     }
 
     @Step("Открыть страницу в новой вкладке")
-    public void openPageInAnotherTab(String pagePath) {
+    public void openPageInAnotherTab(String pagePath, int tabIndex) {
         executeJavaScript("window.open('" + TestEnvironmentConfigurator.getConfig().getBaseUrl() + pagePath
                 + "', '_blank');");
-        switchTo().window(1);
+        switchTo().window(tabIndex);
     }
 
     @Step("Отсортировать книги по нужному столбцу")
@@ -109,5 +111,45 @@ public class BookStoreUiSteps {
         }
 
         return textList;
+    }
+
+    @Step("Получить список отображенных названий книг")
+    public List<String> getBookTitles() {
+
+        return bookCatalogPage.getTitleTexts().texts();
+    }
+
+    @Step("Отсортировать список полученных строк в алфавитном порядке")
+    public List<String> sortAscending(List<String> items) {
+
+        return items.stream().sorted().collect(Collectors.toList());
+    }
+
+    @Step("Отсортировать список полученных строк в обратном алфавитном порядке")
+    public List<String> sortDescending(List<String> items) {
+
+        return items.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+    }
+
+    @Step("Ввести значение в строку поиска")
+    public void searchBooksBy(String searchQuery) {
+        bookCatalogPage.getSearchBox().setValue(searchQuery);
+    }
+
+    @Step("Изменить количество отображаемых строк на одной странице каталога")
+    public void changeAmountOfRowsOnCatalogPage(String selectedOption) {
+        bookCatalogPage.getRowsCountOptionButton().selectOption(selectedOption);
+    }
+
+    @Step("Посчитать максимально возможное количество строк")
+    public int countMaxRows(String selectedOption) {
+
+        return Integer.parseInt(selectedOption.replaceAll("[^0-9]", ""));
+    }
+
+    @Step("Получить количество отображенных строк")
+    public int countActualRows() {
+
+        return bookCatalogPage.getRows().size();
     }
 }

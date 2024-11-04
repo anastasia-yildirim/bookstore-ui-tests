@@ -77,7 +77,7 @@ public class BookStoreApiSteps {
         return response.getBooks();
     }
 
-    @Step("Убедиться, что в профиле нет книг")
+    @Step("Получить список книг из профиля по API")
     public List<BookModel> getBooksFromProfile(Session session) {
         GetBooksFromProfileResponseModel response =
                 given(bookStoreRequestSpec)

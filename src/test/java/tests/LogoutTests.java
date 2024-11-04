@@ -4,17 +4,14 @@ import helpers.WithLogin;
 import io.qameta.allure.*;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import pages.BookCatalogPage;
 import pages.LoginPage;
 import pages.ProfilePage;
 import steps.ui.BookStoreUiSteps;
 
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Tag("authorization")
 @Epic("Книжный магазин DemoQA")
 @Feature("Авторизация пользователя")
 @Story("Выход из учетной записи и завершение сеанса пользователя")
@@ -23,6 +20,7 @@ public class LogoutTests extends TestBase {
     BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
     LoginPage loginPage = new LoginPage();
     ProfilePage profilePage = new ProfilePage();
+    BookCatalogPage bookCatalogPage = new BookCatalogPage();
     SoftAssertions softAssertions = new SoftAssertions();
 
     @Test
@@ -31,8 +29,9 @@ public class LogoutTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @WithLogin
     public void successfulLogout() {
-        bookStoreUiSteps.openBookCatalogPage();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
         bookStoreUiSteps.clickLogoutButton();
+        Allure.step("Убедиться, что пользователь вышел из учетной записи");
         softAssertions.assertThat(bookStoreUiSteps.getDisplayedPageTitle()).isEqualTo(loginPage.getExpectedPageTitle());
         softAssertions.assertThat(loginPage.getLoggedInUserNameValue().isDisplayed()).isFalse();
         softAssertions.assertAll();
@@ -44,9 +43,10 @@ public class LogoutTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @WithLogin
     public void sessionShouldBeExpiredAfterSuccessfulLogout() {
-        bookStoreUiSteps.openBookCatalogPage();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
         bookStoreUiSteps.clickLogoutButton();
-        bookStoreUiSteps.openProfilePage();
+        bookStoreUiSteps.openPage(profilePage.getPath());
+        Allure.step("Убедиться, что сессия истекла");
         assertThat(bookStoreUiSteps.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
     }
 
@@ -56,14 +56,14 @@ public class LogoutTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @WithLogin
     public void multipleTabsLogoutTest() {
-        bookStoreUiSteps.openLoginPage();
+        bookStoreUiSteps.openPage(loginPage.getPath());
+        Allure.step("Убедиться, что пользователь авторизован");
         assertThat(loginPage.getLoggedInMessage().getText()).isEqualTo(loginPage.getExpectedLoggedInMessage());
-
-        bookStoreUiSteps.openPageInAnotherTab(loginPage.getPath());
+        bookStoreUiSteps.openPageInAnotherTab(loginPage.getPath(), 1);
         bookStoreUiSteps.clickLogoutButton();
-
-        switchTo().window(0);
-        loginPage.getProfileLink().shouldBe(visible).click();
+        bookStoreUiSteps.switchToAnotherTab(0);
+        bookStoreUiSteps.goToProfileFromLoginPageWhileLoggedIn();
+        Allure.step("Убедиться, что сессия истекла");
         assertThat(bookStoreUiSteps.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
     }
 }

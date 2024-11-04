@@ -2,7 +2,6 @@ package tests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,14 +12,11 @@ import steps.ui.BookStoreUiSteps;
 import testdata.enums.Publisher;
 import testdata.enums.RowsCountOption;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Tag("bookcatalog")
 @Epic("Книжный магазин DemoQA")
 @Feature("Действия пользователя в каталоге книг")
 @Story("Поиск, фильтрация и сортировка книг в каталоге")
@@ -35,10 +31,11 @@ public class BookCatalogTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByTitleAscendingTest() {
-        bookStoreUiSteps.openBookCatalogPage();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getTitleButton());
-        List<String> titles = bookCatalogPage.getTitleTexts().texts();
-        List<String> sortedTitles = titles.stream().sorted().collect(Collectors.toList());
+        List<String> titles = bookStoreUiSteps.getBookTitles();
+        List<String> sortedTitles = bookStoreUiSteps.sortAscending(titles);
+        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
         assertThat(titles).isEqualTo(sortedTitles);
     }
 
@@ -47,10 +44,11 @@ public class BookCatalogTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByPublisherAscendingTest() {
-        bookStoreUiSteps.openBookCatalogPage();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getPublisherButton());
         List<String> publishers = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getPublisherCells());
-        List<String> sortedPublishers = publishers.stream().sorted().collect(Collectors.toList());
+        List<String> sortedPublishers = bookStoreUiSteps.sortAscending(publishers);
+        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
         assertThat(publishers).isEqualTo(sortedPublishers);
     }
 
@@ -59,10 +57,11 @@ public class BookCatalogTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByAuthorAscendingTest() {
-        bookStoreUiSteps.openBookCatalogPage();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getAuthorButton());
         List<String> authors = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getAuthorCells());
-        List<String> sortedAuthors = authors.stream().sorted().collect(Collectors.toList());
+        List<String> sortedAuthors = bookStoreUiSteps.sortAscending(authors);
+        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
         assertThat(authors).isEqualTo(sortedAuthors);
     }
 
@@ -72,11 +71,12 @@ public class BookCatalogTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByTitleDescendingTest() {
-        bookStoreUiSteps.openBookCatalogPage();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getTitleButton());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getTitleButton());
-        List<String> titles = bookCatalogPage.getTitleTexts().texts();
-        List<String> sortedTitles = titles.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        List<String> titles = bookStoreUiSteps.getBookTitles();
+        List<String> sortedTitles = bookStoreUiSteps.sortDescending(titles);
+        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
         assertThat(titles).isEqualTo(sortedTitles);
     }
 
@@ -85,11 +85,12 @@ public class BookCatalogTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByPublisherDescendingTest() {
-        bookStoreUiSteps.openBookCatalogPage();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getPublisherButton());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getPublisherButton());
         List<String> publishers = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getPublisherCells());
-        List<String> sortedPublishers = publishers.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        List<String> sortedPublishers = bookStoreUiSteps.sortDescending(publishers);
+        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
         assertThat(publishers).isEqualTo(sortedPublishers);
     }
 
@@ -98,11 +99,12 @@ public class BookCatalogTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByAuthorDescendingTest() {
-        bookStoreUiSteps.openBookCatalogPage();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getAuthorButton());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getAuthorButton());
         List<String> authors = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getAuthorCells());
-        List<String> sortedAuthors = authors.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        List<String> sortedAuthors =  bookStoreUiSteps.sortDescending(authors);
+        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
         assertThat(authors).isEqualTo(sortedAuthors);
     }
 
@@ -112,9 +114,10 @@ public class BookCatalogTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @ValueSource(strings = {"Git", "JavaScript", "Design", "Script", "ing"})
     public void filterBookItemsByTitleTest(String searchQuery) {
-        bookStoreUiSteps.openBookCatalogPage();
-        bookCatalogPage.getSearchBox().setValue(searchQuery);
-        List<String> titles = bookCatalogPage.getTitleTexts().texts();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
+        bookStoreUiSteps.searchBooksBy(searchQuery);
+        List<String> titles = bookStoreUiSteps.getBookTitles();
+        Allure.step("Убедиться, что в каталоге найдены книги по критерию");
         assertThat(titles).allMatch(title -> title.contains(searchQuery));
     }
 
@@ -133,9 +136,10 @@ public class BookCatalogTests extends TestBase {
             "'Nicholas C. Zakas'"
     })
     public void filterBookItemsByAuthorTest(String searchQuery) {
-        bookStoreUiSteps.openBookCatalogPage();
-        bookCatalogPage.getSearchBox().setValue(searchQuery);
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
+        bookStoreUiSteps.searchBooksBy(searchQuery);
         List<String> authors = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getAuthorCells());
+        Allure.step("Убедиться, что в каталоге найдены книги по критерию");
         assertThat(authors).allMatch(author -> author.contains(searchQuery));
     }
 
@@ -146,9 +150,10 @@ public class BookCatalogTests extends TestBase {
     @EnumSource(Publisher.class)
     public void filterBookItemsByPublisherTest(Publisher publisher) {
         String publisherName = publisher.getName();
-        bookStoreUiSteps.openBookCatalogPage();
-        bookCatalogPage.getSearchBox().setValue(publisherName);
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
+        bookStoreUiSteps.searchBooksBy(publisherName);
         List<String> publishers = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getPublisherCells());
+        Allure.step("Убедиться, что в каталоге найдены книги по критерию");
         assertThat(publishers).allMatch(publisherItem -> publisherItem.contains(publisherName));
     }
 
@@ -158,11 +163,12 @@ public class BookCatalogTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @EnumSource(RowsCountOption.class)
     public void changeAmountOfRowsDisplayedTest(RowsCountOption option) {
-        bookStoreUiSteps.openBookCatalogPage();
+        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
         String selectedOption = option.getOptionName();
-        bookCatalogPage.getRowsCountOptionButton().selectOption(selectedOption);
-        int maxRowsCount = Integer.parseInt(selectedOption.replaceAll("[^0-9]", ""));
-        int actualRowsCount = bookCatalogPage.getRows().size();
+        bookStoreUiSteps.changeAmountOfRowsOnCatalogPage(selectedOption);
+        int maxRowsCount = bookStoreUiSteps.countMaxRows(selectedOption);
+        int actualRowsCount = bookStoreUiSteps.countActualRows();
+        Allure.step("Убедиться, что количество строк, отображаемых в каталоге, равно выбранному значению или меньше");
         assertTrue(actualRowsCount <= maxRowsCount, "Actual count should be less than or equal to max count");
     }
 }
