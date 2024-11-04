@@ -100,13 +100,13 @@ ___
 ### *Основная страница отчёта*
 
 <p align="center">  
-<img title="Allure Overview Dashboard" src="images/screen/jenkins.png" width="850">  
+<img title="Allure Overview Dashboard" src="images/screen/allure_overview.png" width="850">  
 </p>  
 
 ### *Тест-кейсы*
 
 <p align="center">  
-<img title="Allure Tests" src="images/screen/jenkins_tests.png" width="850">  
+<img title="Allure Tests" src="images/screen/allure_tests.png" width="850">  
 </p>
 
 ### *Графики*
@@ -119,10 +119,10 @@ ___
 
 ____
 <a id="telegram"></a>
-## <img alt="Allure" height="25" src="images/logo/Telegram.svg" width="25"/></a> Уведомление в Telegram при помощи бота
+## <img alt="Telegram" height="25" src="images/logo/Telegram.svg" width="25"/></a> Уведомление в Telegram при помощи бота
 ____
 <p align="center">  
-<img title="Allure Overview Dashboard" src="images/screen/telegram.png" width="550">  
+<img title="Telegram Notification" src="images/screen/telegram.png" width="550">  
 </p>
 
 ____
