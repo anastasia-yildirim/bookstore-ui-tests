@@ -16,8 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("authorization")
 @Epic("Книжный магазин DemoQA")
-@Story("Авторизация пользователя")
-@Feature("Выход из учетной записи и завершение сеанса пользователя")
+@Feature("Авторизация пользователя")
+@Story("Выход из учетной записи и завершение сеанса пользователя")
 public class LogoutTests extends TestBase {
 
     BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();

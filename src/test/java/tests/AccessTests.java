@@ -11,8 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("authorization")
 @Epic("Книжный магазин DemoQA")
-@Story("Авторизация пользователя")
-@Feature("Доступ к страницам неавторизованного пользователя")
+@Feature("Авторизация пользователя")
+@Story("Доступ к страницам неавторизованного пользователя")
+
 public class AccessTests extends TestBase {
 
     BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();

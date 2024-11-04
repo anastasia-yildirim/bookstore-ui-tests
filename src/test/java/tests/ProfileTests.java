@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Tag("profile")
 @Epic("Книжный магазин DemoQA")
-@Story("Действия пользователя в профиле")
-@Feature("Добавление книг в профиль и удаление книг из профиля")
+@Feature("Действия пользователя в профиле")
+@Story("Добавление книг в профиль и удаление книг из профиля")
 public class ProfileTests extends TestBase {
 
     BookStoreApiSteps bookStoreApiSteps = new BookStoreApiSteps();

@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Tag("books")
+@Tag("bookcatalog")
 @Epic("Книжный магазин DemoQA")
-@Story("Действия пользователя в каталоге книг")
-@Feature("Поиск, фильтрация и сортировка книг в каталоге")
+@Feature("Действия пользователя в каталоге книг")
+@Story("Поиск, фильтрация и сортировка книг в каталоге")
 public class BookCatalogTests extends TestBase {
 
     BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
