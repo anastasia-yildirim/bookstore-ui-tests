@@ -23,6 +23,4 @@ public class BookCatalogPage {
     private SelenideElement row = $(".rt-tr-group");
     private ElementsCollection rows = $$(".rt-tr-group");
     private SelenideElement rowsCountOptionButton = $("select[aria-label='rows per page']");
-
-
 }

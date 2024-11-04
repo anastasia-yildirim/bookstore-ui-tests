@@ -1,26 +1,28 @@
 package tests;
 
 import config.TestEnvironmentConfigurator;
-import io.qameta.allure.Owner;
-import lombok.Data;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.BookCatalogPage;
 import pages.LoginPage;
 import steps.ui.BookStoreUiSteps;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Data
+@Tag("authorization")
+@Epic("Книжный магазин DemoQA")
+@Story("Авторизация пользователя")
+@Feature("Успешная и неуспешная авторизация")
 public class LoginTests extends TestBase {
 
     BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
-    BookCatalogPage bookCatalogPage = new BookCatalogPage();
     LoginPage loginPage = new LoginPage();
 
     @Test
     @DisplayName("Успешная авторизация")
     @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.BLOCKER)
     public void successfulLogin() {
         bookStoreUiSteps.openLoginPage();
         bookStoreUiSteps.enterUserName(TestEnvironmentConfigurator.getConfig().login());
@@ -32,6 +34,7 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("Неуспешная авторизация - неверный логин")
     @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.CRITICAL)
     public void unsuccessfulLoginWithInvalidUserName() {
         bookStoreUiSteps.openLoginPage();
         bookStoreUiSteps.enterUserName("invalid_login");
@@ -43,6 +46,7 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("Неуспешная авторизация - неверный пароль")
     @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.CRITICAL)
     public void unsuccessfulLoginWithInvalidPassword() {
         bookStoreUiSteps.openLoginPage();
         bookStoreUiSteps.enterUserName(TestEnvironmentConfigurator.getConfig().login());

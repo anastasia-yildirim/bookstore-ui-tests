@@ -1,6 +1,8 @@
 package tests;
 
-import io.qameta.allure.Issue;
+import io.qameta.allure.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,66 +20,83 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Tag("books")
+@Epic("Книжный магазин DemoQA")
+@Story("Действия пользователя в каталоге книг")
+@Feature("Поиск, фильтрация и сортировка книг в каталоге")
 public class BookCatalogTests extends TestBase {
 
     BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
     BookCatalogPage bookCatalogPage = new BookCatalogPage();
 
-    @Issue("Bug: the sorting order is wrong")
     @Test
+    @DisplayName("Сортировка книг в каталоге по названию в алфавитном порядке")
+    @Issue("Bug: the sorting order is wrong")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByTitleAscendingTest() {
         bookStoreUiSteps.openBookCatalogPage();
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getTitleButton());
         List<String> titles = bookCatalogPage.getTitleTexts().texts();
         List<String> sortedTitles = titles.stream().sorted().collect(Collectors.toList());
-        //Assert
         assertThat(titles).isEqualTo(sortedTitles);
     }
 
     @Test
+    @DisplayName("Сортировка книг в каталоге по издательству в алфавитном порядке")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByPublisherAscendingTest() {
         bookStoreUiSteps.openBookCatalogPage();
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getPublisherButton());
         List<String> publishers = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getPublisherCells());
         List<String> sortedPublishers = publishers.stream().sorted().collect(Collectors.toList());
-        //Assert
         assertThat(publishers).isEqualTo(sortedPublishers);
     }
 
     @Test
+    @DisplayName("Сортировка книг в каталоге по автору в алфавитном порядке")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByAuthorAscendingTest() {
         bookStoreUiSteps.openBookCatalogPage();
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getAuthorButton());
         List<String> authors = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getAuthorCells());
         List<String> sortedAuthors = authors.stream().sorted().collect(Collectors.toList());
-        //Assert
         assertThat(authors).isEqualTo(sortedAuthors);
     }
 
-    @Issue("Bug: the sorting order is wrong")
     @Test
+    @DisplayName("Сортировка книг в каталоге по названию в обратном алфавитном порядке")
+    @Issue("Bug: the sorting order is wrong")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByTitleDescendingTest() {
         bookStoreUiSteps.openBookCatalogPage();
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getTitleButton());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getTitleButton());
         List<String> titles = bookCatalogPage.getTitleTexts().texts();
         List<String> sortedTitles = titles.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-        //Assert
         assertThat(titles).isEqualTo(sortedTitles);
     }
 
     @Test
+    @DisplayName("Сортировка книг в каталоге по издательству в обратном алфавитном порядке")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByPublisherDescendingTest() {
         bookStoreUiSteps.openBookCatalogPage();
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getPublisherButton());
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getPublisherButton());
         List<String> publishers = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getPublisherCells());
         List<String> sortedPublishers = publishers.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-        //Assert
         assertThat(publishers).isEqualTo(sortedPublishers);
     }
 
     @Test
+    @DisplayName("Сортировка книг в каталоге по автору в обратном алфавитном порядке")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByAuthorDescendingTest() {
         bookStoreUiSteps.openBookCatalogPage();
         bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getAuthorButton());
@@ -88,6 +107,9 @@ public class BookCatalogTests extends TestBase {
     }
 
     @ParameterizedTest
+    @DisplayName("Поиск книг в каталоге по названию")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     @ValueSource(strings = {"Git", "JavaScript", "Design", "Script", "ing"})
     public void filterBookItemsByTitleTest(String searchQuery) {
         bookStoreUiSteps.openBookCatalogPage();
@@ -97,6 +119,9 @@ public class BookCatalogTests extends TestBase {
     }
 
     @ParameterizedTest
+    @DisplayName("Поиск книг в каталоге по автору")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     @CsvSource({
             "'Richard E. Silverman'",
             "'Addy Osmani'",
@@ -115,6 +140,9 @@ public class BookCatalogTests extends TestBase {
     }
 
     @ParameterizedTest
+    @DisplayName("Поиск книг в каталоге по издательству")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     @EnumSource(Publisher.class)
     public void filterBookItemsByPublisherTest(Publisher publisher) {
         String publisherName = publisher.getName();
@@ -125,6 +153,9 @@ public class BookCatalogTests extends TestBase {
     }
 
     @ParameterizedTest
+    @DisplayName("Изменение количества строк, отображаемых в каталоге")
+    @Owner("@anastasiayildirim")
+    @Severity(SeverityLevel.NORMAL)
     @EnumSource(RowsCountOption.class)
     public void changeAmountOfRowsDisplayedTest(RowsCountOption option) {
         bookStoreUiSteps.openBookCatalogPage();
