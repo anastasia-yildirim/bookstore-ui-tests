@@ -14,6 +14,7 @@ import testdata.enums.RowsCountOption;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -115,7 +116,9 @@ public class BookCatalogTests extends TestBase {
     @ValueSource(strings = {"Git", "JavaScript", "Design", "Script", "ing"})
     public void filterBookItemsByTitleTest(String searchQuery) {
         bookStoreUiSteps.openPage(bookCatalogPage.getPath());
+        sleep(500);
         bookStoreUiSteps.searchBooksBy(searchQuery);
+        sleep(500);
         List<String> titles = bookStoreUiSteps.getBookTitles();
         Allure.step("Убедиться, что в каталоге найдены книги по критерию");
         assertThat(titles).allMatch(title -> title.contains(searchQuery));
