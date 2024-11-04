@@ -71,10 +71,12 @@ ____
 ## Команды для запуска из терминала
 ___
 ***Локальный запуск:***
-Чтобы получить ЛОГИН и ПАРОЛЬ, создайте тестового пользователя на https://demoqa.com/register
+
 ```bash  
 gradle clean test -Dlogin=ЛОГИН -Dpassword=ПАРОЛЬ
 ```
+Чтобы получить ЛОГИН и ПАРОЛЬ, создайте тестового пользователя на https://demoqa.com/register
+
 
 ***Удалённый запуск через Jenkins:***
 ```bash  
@@ -92,7 +94,7 @@ clean test
 ```
 ___
 <a id="allure"></a>
-## <img alt="Allure" height="25" src="images/logo/Allure.svg" width="25"/></a> <a name="Allure"></a>Allure [отчет](https://jenkins.autotests.cloud/job/Kod3ik_qa_guru_x5/allure/)</a>
+## <img alt="Allure" height="25" src="images/logo/Allure.svg" width="25"/></a> <a name="Allure"></a>Allure [отчет](https://jenkins.autotests.cloud/job/029-anastasia-yildirim-qa_guru_java-bookstore-ui-tests/allure/)</a>
 ___
 
 ### *Основная страница отчёта*
@@ -115,36 +117,6 @@ ___
 <img title="Allure Graphics" src="images/screen/graphs.png" width="850">  
 </p>
 
-___
-<a id="allure-testops"></a>
-## <img alt="Allure" height="25" src="images/logo/Allure2.svg" width="25"/></a>Интеграция с <a target="_blank" href="https://allure.autotests.cloud/project/2197/dashboards">Allure TestOps</a>
-____
-### *Allure TestOps Dashboard*
-
-<p align="center">  
-<img title="Allure TestOps Dashboard" src="images/screen/allure_overview.png" width="850">  
-</p>  
-
-### *Ручные тест-кейсы*
-
-<p align="center">  
-<img title="Allure Tests" src="images/screen/manual_tests.png" width="850">  
-</p>
-
-### *Авто тест-кейсы*
-
-<p align="center">  
-<img title="Allure TestOps Tests" src="images/screen/allure_autotestsN.png" width="850">  
-</p>
-
-___
-<a id="jira"></a>
-## <img alt="Allure" height="25" src="images/logo/Jira.svg" width="25"/></a> Интеграция с <a target="_blank" href="https://jira.autotests.cloud/browse/HOMEWORK-682">Jira</a>
-____
-<p align="center">  
-<img title="Jira" src="images/screen/jira.png" width="850">  
-</p>
-
 ____
 <a id="telegram"></a>
 ## <img alt="Allure" height="25" src="images/logo/Telegram.svg" width="25"/></a> Уведомление в Telegram при помощи бота
@@ -158,5 +130,5 @@ ____
 ## <img alt="Selenoid" height="25" src="images/logo/Selenoid.svg" width="25"/></a> Примеры видео выполнения тестов на Selenoid
 ____
 <p align="center">
-<img title="Selenoid Video" src="images/video/x5.gif" width="550" height="350"  alt="video">   
+<img title="Selenoid Video" src="images/video/bookstore.gif" width="550" height="350"  alt="video">   
 </p>
