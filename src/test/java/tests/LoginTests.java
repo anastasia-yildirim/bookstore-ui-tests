@@ -14,8 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("Успешная и неуспешная авторизация")
 public class LoginTests extends TestBase {
 
-    BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
-    LoginPage loginPage = new LoginPage();
+    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
+    private final LoginPage loginPage = new LoginPage();
 
     @Test
     @DisplayName("Успешная авторизация")

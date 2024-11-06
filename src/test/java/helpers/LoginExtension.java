@@ -19,7 +19,7 @@ public class LoginExtension implements BeforeEachCallback {
     }
 
     @Override
-    public void beforeEach(ExtensionContext extensionContext) throws Exception {
+    public void beforeEach(ExtensionContext extensionContext) {
             Session newSession = new Session();
             LoginResponseModel authResponse = BookStoreAuthorizationApi.getAuthorization();
             newSession.setUserId(authResponse.getUserId());

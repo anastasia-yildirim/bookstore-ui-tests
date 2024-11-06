@@ -10,7 +10,7 @@ import static io.restassured.filter.log.LogDetail.ALL;
 
 public class BookStoreSpec {
 
-    public static RequestSpecification bookStoreRequestSpec = with()
+    public static final RequestSpecification bookStoreRequestSpec = with()
             .filter(withCustomTemplates())
             .log().all()
             .contentType("application/json");
@@ -22,8 +22,8 @@ public class BookStoreSpec {
                 .build();
     }
 
-    public static ResponseSpecification bookStoreResponseSpec200 = bookStoreResponseSpec(200);
-    public static ResponseSpecification bookStoreResponseSpec201 = bookStoreResponseSpec(201);
-    public static ResponseSpecification bookStoreResponseSpec204 = bookStoreResponseSpec(204);
+    public static final ResponseSpecification bookStoreResponseSpec200 = bookStoreResponseSpec(200);
+    public static final ResponseSpecification bookStoreResponseSpec201 = bookStoreResponseSpec(201);
+    public static final ResponseSpecification bookStoreResponseSpec204 = bookStoreResponseSpec(204);
 
 }

@@ -14,7 +14,6 @@ import testdata.enums.RowsCountOption;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Story("Поиск, фильтрация и сортировка книг в каталоге")
 public class BookCatalogTests extends TestBase {
 
-    BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
-    BookCatalogPage bookCatalogPage = new BookCatalogPage();
+    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
+    private final BookCatalogPage bookCatalogPage = new BookCatalogPage();
 
     @Test
     @DisplayName("Сортировка книг в каталоге по названию в алфавитном порядке")

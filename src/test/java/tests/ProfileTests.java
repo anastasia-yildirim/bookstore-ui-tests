@@ -23,9 +23,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @Story("Добавление книг в профиль и удаление книг из профиля")
 public class ProfileTests extends TestBase {
 
-    BookStoreApiSteps bookStoreApiSteps = new BookStoreApiSteps();
-    BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
-    ProfilePage profilePage = new ProfilePage();
+    private final BookStoreApiSteps bookStoreApiSteps = new BookStoreApiSteps();
+    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
+    private final ProfilePage profilePage = new ProfilePage();
 
     @Test
     @WithLogin

@@ -14,8 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccessTests extends TestBase {
 
-    BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
-    ProfilePage profilePage = new ProfilePage();
+    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
+    private final ProfilePage profilePage = new ProfilePage();
 
     @Test
     @DisplayName("Неуспешная попытка неавторизованного пользователя перейти в профиль")

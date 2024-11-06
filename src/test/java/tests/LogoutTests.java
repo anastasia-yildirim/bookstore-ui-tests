@@ -17,11 +17,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("Выход из учетной записи и завершение сеанса пользователя")
 public class LogoutTests extends TestBase {
 
-    BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
-    LoginPage loginPage = new LoginPage();
-    ProfilePage profilePage = new ProfilePage();
-    BookCatalogPage bookCatalogPage = new BookCatalogPage();
-    SoftAssertions softAssertions = new SoftAssertions();
+    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
+    private final LoginPage loginPage = new LoginPage();
+    private final ProfilePage profilePage = new ProfilePage();
+    private final BookCatalogPage bookCatalogPage = new BookCatalogPage();
+    private final SoftAssertions softAssertions = new SoftAssertions();
 
     @Test
     @DisplayName("Успешный выход пользователя")

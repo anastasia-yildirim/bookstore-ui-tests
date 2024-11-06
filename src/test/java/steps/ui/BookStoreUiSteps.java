@@ -18,9 +18,9 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class BookStoreUiSteps {
 
-    ProfilePage profilePage = new ProfilePage();
-    LoginPage loginPage = new LoginPage();
-    BookCatalogPage bookCatalogPage = new BookCatalogPage();
+    private final ProfilePage profilePage = new ProfilePage();
+    private final LoginPage loginPage = new LoginPage();
+    private final BookCatalogPage bookCatalogPage = new BookCatalogPage();
 
     @Step("Открыть страницу")
     public void openPage(String pagePath) {
