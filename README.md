@@ -74,7 +74,7 @@ ___
 ```bash  
 gradle clean test -Dlogin=ЛОГИН -Dpassword=ПАРОЛЬ
 ```
-Чтобы получить ЛОГИН и ПАРОЛЬ, создайте тестового пользователя на https://demoqa.com/register
+Чтобы получить логин и пароль, создайте тестового пользователя на https://demoqa.com/register
 
 
 ***Удалённый запуск через Jenkins:***
