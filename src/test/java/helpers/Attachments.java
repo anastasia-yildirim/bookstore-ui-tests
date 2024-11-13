@@ -58,7 +58,7 @@ public class Attachments {
         return null;
     }
 
-    public static String getSessionId(){
+    public static String getSessionId() {
         return ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
     }
 
@@ -67,7 +67,9 @@ public class Attachments {
 
         screenshotAs("Last screenshot");
         pageSource();
-        if (Objects.equals(config.browserName(), "chrome")) { browserConsoleLogs(); }
+        if (Objects.equals(config.browserName(), "chrome")) {
+            browserConsoleLogs();
+        }
         addVideo();
     }
 }

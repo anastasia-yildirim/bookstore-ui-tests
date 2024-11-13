@@ -1,7 +1,7 @@
 package api.models.request;
 
-import lombok.Data;
 import api.models.BookModel;
+import lombok.Data;
 
 import java.util.List;
 

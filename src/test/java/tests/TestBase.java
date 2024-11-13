@@ -5,7 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static helpers.Attachments.*;
+import static helpers.Attachments.generateDataForAllureReport;
 import static helpers.LoginExtension.clearSession;
 
 public class TestBase {
@@ -14,7 +14,7 @@ public class TestBase {
 
     @BeforeAll
     public static void setUp() {
-        driver.createWebDriver();
+        driver.processConfig();
     }
 
     @AfterEach

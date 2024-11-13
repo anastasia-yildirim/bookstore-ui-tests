@@ -2,9 +2,9 @@ package helpers;
 
 import api.models.Session;
 import api.models.response.LoginResponseModel;
+import api.steps.BookStoreAuthorizationApi;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import api.steps.BookStoreAuthorizationApi;
 
 public class LoginExtension implements BeforeEachCallback {
 
@@ -20,13 +20,13 @@ public class LoginExtension implements BeforeEachCallback {
 
     @Override
     public void beforeEach(ExtensionContext extensionContext) {
-            Session newSession = new Session();
-            LoginResponseModel authResponse = BookStoreAuthorizationApi.getAuthorization();
-            newSession.setUserId(authResponse.getUserId());
-            newSession.setToken(authResponse.getToken());
-            newSession.setExpires(authResponse.getExpires());
-            session.set(newSession);
+        Session newSession = new Session();
+        LoginResponseModel authResponse = BookStoreAuthorizationApi.getAuthorization();
+        newSession.setUserId(authResponse.getUserId());
+        newSession.setToken(authResponse.getToken());
+        newSession.setExpires(authResponse.getExpires());
+        session.set(newSession);
 
-            BookStoreAuthorizationApi.buildAuthorizationCookie(session.get());
+        BookStoreAuthorizationApi.buildAuthorizationCookie(session.get());
     }
 }

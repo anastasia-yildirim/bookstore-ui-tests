@@ -2,17 +2,17 @@ package api.steps;
 
 import api.models.BookModel;
 import api.models.Session;
-import io.qameta.allure.Step;
 import api.models.request.AddBookToProfileRequestModel;
 import api.models.response.AddBookToProfileResponseModel;
 import api.models.response.GetBooksFromProfileResponseModel;
 import api.models.response.GetBooksFromStoreResponseModel;
+import io.qameta.allure.Step;
 
 import java.util.List;
 import java.util.Random;
 
-import static io.restassured.RestAssured.given;
 import static api.specs.BookStoreSpec.*;
+import static io.restassured.RestAssured.given;
 
 public class BookStoreApiSteps {
 
@@ -35,7 +35,7 @@ public class BookStoreApiSteps {
                         .get("/BookStore/v1/books")
                         .then()
                         .spec(bookStoreResponseSpec200)
-                .extract().as(GetBooksFromStoreResponseModel.class);
+                        .extract().as(GetBooksFromStoreResponseModel.class);
 
         return response.getBooks();
     }
@@ -86,7 +86,7 @@ public class BookStoreApiSteps {
                         .get("/Account/v1/User/" + session.getUserId())
                         .then()
                         .spec(bookStoreResponseSpec200)
-                .extract().as(GetBooksFromProfileResponseModel.class);
+                        .extract().as(GetBooksFromProfileResponseModel.class);
 
         return response.getBooks();
     }

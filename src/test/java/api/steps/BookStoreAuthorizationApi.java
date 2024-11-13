@@ -1,21 +1,21 @@
 package api.steps;
 
 import api.models.Session;
-import io.qameta.allure.Step;
 import api.models.auth.GenerateTokenRequestModel;
 import api.models.auth.GenerateTokenResponseModel;
 import api.models.request.LoginRequestModel;
 import api.models.response.LoginResponseModel;
+import config.Config;
+import io.qameta.allure.Step;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Cookie;
 
-import config.Config;
-
+import static api.specs.BookStoreSpec.bookStoreRequestSpec;
+import static api.specs.BookStoreSpec.bookStoreResponseSpec200;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static api.specs.BookStoreSpec.*;
 
 public class BookStoreAuthorizationApi {
 
@@ -34,8 +34,8 @@ public class BookStoreAuthorizationApi {
                         .spec(bookStoreResponseSpec200)
                         .extract().as(GenerateTokenResponseModel.class);
 
-            assertEquals("Success", response.getStatus());
-            assertEquals("User authorized successfully.", response.getResult());
+        assertEquals("Success", response.getStatus());
+        assertEquals("User authorized successfully.", response.getResult());
     }
 
     @Step("Залогиниться")

@@ -7,10 +7,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import ui.pages.BookCatalogPage;
-import ui.steps.BookStoreUiSteps;
 import testdata.enums.Publisher;
 import testdata.enums.RowsCountOption;
+import ui.pages.BookCatalogPage;
+import ui.steps.BookStoreUiSteps;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
