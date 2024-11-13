@@ -2,7 +2,6 @@ package tests;
 
 import helpers.WithLogin;
 import io.qameta.allure.*;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.BookCatalogPage;
@@ -21,7 +20,6 @@ public class LogoutTests extends TestBase {
     private final LoginPage loginPage = new LoginPage();
     private final ProfilePage profilePage = new ProfilePage();
     private final BookCatalogPage bookCatalogPage = new BookCatalogPage();
-    private final SoftAssertions softAssertions = new SoftAssertions();
 
     @Test
     @DisplayName("Успешный выход пользователя")
@@ -31,10 +29,7 @@ public class LogoutTests extends TestBase {
     public void successfulLogout() {
         bookCatalogPage.openCatalogPage();
         bookCatalogPage.clickLogoutButton();
-        Allure.step("Убедиться, что пользователь вышел из учетной записи");
-        softAssertions.assertThat(loginPage.getDisplayedPageTitle()).isEqualTo(loginPage.getExpectedPageTitle());
-        softAssertions.assertThat(loginPage.getLoggedInUserNameValue().isDisplayed()).isFalse();
-        softAssertions.assertAll();
+        loginPage.checkUserIsLoggedOut();
     }
 
     @Test
@@ -46,8 +41,7 @@ public class LogoutTests extends TestBase {
         bookCatalogPage.openCatalogPage();
         bookCatalogPage.clickLogoutButton();
         profilePage.openProfilePage();
-        Allure.step("Убедиться, что сессия истекла");
-        assertThat(profilePage.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
+        profilePage.checkNotLoggedInMessage();
     }
 
     @Test
@@ -63,7 +57,6 @@ public class LogoutTests extends TestBase {
         bookCatalogPage.clickLogoutButton();
         bookStoreUiSteps.switchToAnotherTab(0);
         loginPage.goToProfileFromLoginPageWhileLoggedIn();
-        Allure.step("Убедиться, что сессия истекла");
-        assertThat(profilePage.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
+        profilePage.checkNotLoggedInMessage();
     }
 }

@@ -3,15 +3,19 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.Data;
+import org.assertj.core.api.SoftAssertions;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Data
 public class LoginPage {
-    private String path = "/login";
 
+    private final SoftAssertions softAssertions = new SoftAssertions();
+    private final String expectedValidationMessage = "Invalid username or password!";
+    private String path = "/login";
     private SelenideElement userName = $("#userName");
     private SelenideElement passwordElement = $("#password");
     private SelenideElement loginButton = $("#login");
@@ -20,8 +24,6 @@ public class LoginPage {
     private SelenideElement loggedInUserNameValue = $("#userName-value");
     private SelenideElement loggedInMessage = $("#loading-label");
     private SelenideElement profileLink = $("#loading-label a");
-
-    private String expectedValidationMessage = "Invalid username or password!";
     private String expectedPageTitle = "Login";
     private String expectedLoggedInMessage = "You are already logged in. View your profile.";
 
@@ -45,20 +47,20 @@ public class LoginPage {
         loginButton.click();
     }
 
-    @Step("Получить отобразившееся валидационное сообщение")
-    public String getValidationMessageText() {
-
-        return validationMessage.getText();
-    }
-
     @Step("Перейти в профиль со страницы авторизации (пользователь авторизован)")
     public void goToProfileFromLoginPageWhileLoggedIn() {
         profileLink.shouldBe(visible).click();
     }
 
-    @Step("Получить название отобразившейся страницы")
-    public String getDisplayedPageTitle() {
+    @Step("Убедиться, что пользователь вышел из учетной записи")
+    public void checkUserIsLoggedOut() {
+        softAssertions.assertThat(pageTitle.getText()).isEqualTo(expectedPageTitle);
+        softAssertions.assertThat(loggedInUserNameValue.isDisplayed()).isFalse();
+        softAssertions.assertAll();
+    }
 
-        return pageTitle.getText();
+    @Step("Убедиться, что отображается сообщение " + expectedValidationMessage)
+    public void checkValidationMessage() {
+        assertThat(validationMessage.getText()).isEqualTo(expectedValidationMessage);
     }
 }

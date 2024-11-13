@@ -12,9 +12,6 @@ import steps.ui.BookStoreUiSteps;
 import testdata.enums.Publisher;
 import testdata.enums.RowsCountOption;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Epic("Книжный магазин DemoQA")
@@ -32,11 +29,8 @@ public class BookCatalogTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByTitleAscendingTest() {
         bookCatalogPage.openCatalogPage();
-        bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getTitleButton());
-        List<String> titles = bookCatalogPage.getBookTitles();
-        List<String> sortedTitles = bookStoreUiSteps.sortAscending(titles);
-        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
-        assertThat(titles).isEqualTo(sortedTitles);
+        bookCatalogPage.sortBookItemsByTitle();
+        bookCatalogPage.checkBooksAreSortedAscendingByTitle();
     }
 
     @Test
@@ -45,11 +39,8 @@ public class BookCatalogTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByPublisherAscendingTest() {
         bookCatalogPage.openCatalogPage();
-        bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getPublisherButton());
-        List<String> publishers = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getPublisherCells());
-        List<String> sortedPublishers = bookStoreUiSteps.sortAscending(publishers);
-        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
-        assertThat(publishers).isEqualTo(sortedPublishers);
+        bookCatalogPage.sortBookItemsByPublisher();
+        bookCatalogPage.checkBooksAreSortedAscendingByPublisher();
     }
 
     @Test
@@ -58,11 +49,8 @@ public class BookCatalogTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByAuthorAscendingTest() {
         bookCatalogPage.openCatalogPage();
-        bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getAuthorButton());
-        List<String> authors = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getAuthorCells());
-        List<String> sortedAuthors = bookStoreUiSteps.sortAscending(authors);
-        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
-        assertThat(authors).isEqualTo(sortedAuthors);
+        bookCatalogPage.sortBookItemsByAuthor();
+        bookCatalogPage.checkBooksAreSortedAscendingByAuthor();
     }
 
     @Test
@@ -72,12 +60,9 @@ public class BookCatalogTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByTitleDescendingTest() {
         bookCatalogPage.openCatalogPage();
-        bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getTitleButton());
-        bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getTitleButton());
-        List<String> titles = bookCatalogPage.getBookTitles();
-        List<String> sortedTitles = bookStoreUiSteps.sortDescending(titles);
-        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
-        assertThat(titles).isEqualTo(sortedTitles);
+        bookCatalogPage.sortBookItemsByTitle();
+        bookCatalogPage.sortBookItemsByTitle();
+        bookCatalogPage.checkBooksAreSortedDescendingByTitle();
     }
 
     @Test
@@ -86,12 +71,9 @@ public class BookCatalogTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByPublisherDescendingTest() {
         bookCatalogPage.openCatalogPage();
-        bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getPublisherButton());
-        bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getPublisherButton());
-        List<String> publishers = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getPublisherCells());
-        List<String> sortedPublishers = bookStoreUiSteps.sortDescending(publishers);
-        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
-        assertThat(publishers).isEqualTo(sortedPublishers);
+        bookCatalogPage.sortBookItemsByPublisher();
+        bookCatalogPage.sortBookItemsByPublisher();
+        bookCatalogPage.checkBooksAreSortedDescendingByPublisher();
     }
 
     @Test
@@ -100,12 +82,9 @@ public class BookCatalogTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     public void sortBookItemsByAuthorDescendingTest() {
         bookCatalogPage.openCatalogPage();
-        bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getAuthorButton());
-        bookStoreUiSteps.sortBookItemsBy(bookCatalogPage.getAuthorButton());
-        List<String> authors = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getAuthorCells());
-        List<String> sortedAuthors = bookStoreUiSteps.sortDescending(authors);
-        Allure.step("Убедиться, что в каталоге книги отсортированы в правильном порядке");
-        assertThat(authors).isEqualTo(sortedAuthors);
+        bookCatalogPage.sortBookItemsByAuthor();
+        bookCatalogPage.sortBookItemsByAuthor();
+        bookCatalogPage.checkBooksAreSortedDescendingByAuthor();
     }
 
     @ParameterizedTest
@@ -116,9 +95,7 @@ public class BookCatalogTests extends TestBase {
     public void filterBookItemsByTitleTest(String searchQuery) {
         bookCatalogPage.openCatalogPage();
         bookCatalogPage.searchBooksBy(searchQuery);
-        List<String> titles = bookCatalogPage.getBookTitles();
-        Allure.step("Убедиться, что в каталоге найдены книги по критерию");
-        assertThat(titles).allMatch(title -> title.contains(searchQuery));
+        bookCatalogPage.checkBooksAreFilteredByTitle(searchQuery);
     }
 
     @ParameterizedTest
@@ -138,9 +115,7 @@ public class BookCatalogTests extends TestBase {
     public void filterBookItemsByAuthorTest(String searchQuery) {
         bookCatalogPage.openCatalogPage();
         bookCatalogPage.searchBooksBy(searchQuery);
-        List<String> authors = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getAuthorCells());
-        Allure.step("Убедиться, что в каталоге найдены книги по критерию");
-        assertThat(authors).allMatch(author -> author.contains(searchQuery));
+        bookCatalogPage.checkBooksAreFilteredByAuthor(searchQuery);
     }
 
     @ParameterizedTest
@@ -152,9 +127,7 @@ public class BookCatalogTests extends TestBase {
         String publisherName = publisher.getName();
         bookCatalogPage.openCatalogPage();
         bookCatalogPage.searchBooksBy(publisherName);
-        List<String> publishers = bookStoreUiSteps.getTextFromCells(bookCatalogPage.getPublisherCells());
-        Allure.step("Убедиться, что в каталоге найдены книги по критерию");
-        assertThat(publishers).allMatch(publisherItem -> publisherItem.contains(publisherName));
+        bookCatalogPage.checkBooksAreFilteredByPublisher(publisherName);
     }
 
     @ParameterizedTest

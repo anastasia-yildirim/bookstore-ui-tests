@@ -7,14 +7,14 @@ import lombok.Data;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Data
 public class ProfilePage {
 
-    private String path = "/profile";
-
-    private String notLoggedInText = "Currently you are not logged into the Book Store application, please visit " +
+    private final String notLoggedInText = "Currently you are not logged into the Book Store application, please visit " +
             "the login page to enter or register page to register yourself.";
+    private String path = "/profile";
     private SelenideElement notLoggedInLabel = $("#notLoggin-label");
     private SelenideElement closeModalButton = $("#closeSmallModal-ok");
     private SelenideElement deleteRecordButton = $("#delete-record-undefined");
@@ -35,16 +35,15 @@ public class ProfilePage {
         return $(".ReactTable").$("a[href='/profile?book=" + isbn + "']");
     }
 
-    @Step("Получить отображаемое сообщение для пользователя")
-    public String getNotLoggedInMessageDisplayed() {
-
-        return notLoggedInLabel.getText();
-    }
-
     @Step("Удалить книгу из профиля")
     public void deleteBookFromProfile(String isbn) {
         getSpecificBookInProfile(isbn).shouldBe(visible);
         deleteRecordButton.scrollTo().click();
         closeModalButton.click();
+    }
+
+    @Step("Убедиться, отображается сообщение " + notLoggedInText)
+    public void checkNotLoggedInMessage() {
+        assertThat(notLoggedInLabel.getText()).isEqualTo(notLoggedInText);
     }
 }

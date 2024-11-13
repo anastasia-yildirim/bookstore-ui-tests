@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import pages.BookCatalogPage;
 import pages.LoginPage;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @Epic("Книжный магазин DemoQA")
 @Feature("Авторизация пользователя")
 @Story("Успешная и неуспешная авторизация")
@@ -26,8 +24,7 @@ public class LoginTests extends TestBase {
         loginPage.enterUserName(TestEnvironmentConfigurator.getConfig().login());
         loginPage.enterPassword(TestEnvironmentConfigurator.getConfig().password());
         loginPage.clickLoginButton();
-        Allure.step("Убедиться, что пользователь успешно авторизовался");
-        assertThat(bookCatalogPage.getDisplayedLogin()).isEqualTo(TestEnvironmentConfigurator.getConfig().login());
+        bookCatalogPage.checkUserIsLoggedIn();
     }
 
     @Test
@@ -39,8 +36,7 @@ public class LoginTests extends TestBase {
         loginPage.enterUserName("invalid_login");
         loginPage.enterPassword(TestEnvironmentConfigurator.getConfig().password());
         loginPage.clickLoginButton();
-        Allure.step("Убедиться, что отображается сообщение " + loginPage.getExpectedValidationMessage());
-        assertThat(loginPage.getValidationMessageText()).isEqualTo(loginPage.getExpectedValidationMessage());
+        loginPage.checkValidationMessage();
     }
 
     @Test
@@ -52,7 +48,6 @@ public class LoginTests extends TestBase {
         loginPage.enterUserName(TestEnvironmentConfigurator.getConfig().login());
         loginPage.enterPassword("invalid_password");
         loginPage.clickLoginButton();
-        Allure.step("Убедиться, что отображается сообщение " + loginPage.getExpectedValidationMessage());
-        assertThat(loginPage.getValidationMessageText()).isEqualTo(loginPage.getExpectedValidationMessage());
+        loginPage.checkValidationMessage();
     }
 }

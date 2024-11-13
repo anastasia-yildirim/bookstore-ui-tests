@@ -3,15 +3,24 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import config.TestEnvironmentConfigurator;
 import io.qameta.allure.Step;
 import lombok.Data;
+import org.assertj.core.api.Assertions;
+import steps.ui.BookStoreUiSteps;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selenide.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Data
 public class BookCatalogPage {
+
+    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
 
     private String path = "/books";
 
@@ -28,26 +37,18 @@ public class BookCatalogPage {
     private ElementsCollection rows = $$(".rt-tr-group");
     private SelenideElement rowsCountOptionButton = $("select[aria-label='rows per page']");
 
+    private List<String> titles = titleTexts.texts();
+    private List<String> publishers = getTextFromCells(publisherCells);
+    private List<String> authors = getTextFromCells(authorCells);
+
     @Step("Открыть страницу каталога")
     public void openCatalogPage() {
         open(path);
     }
 
-    @Step("Получить отобразившийся логин пользователя")
-    public String getDisplayedLogin() {
-
-        return userNameValue.getText();
-    }
-
     @Step("Нажать на кнопку Logout")
     public void clickLogoutButton() {
         logoutButton.click();
-    }
-
-    @Step("Получить список отображенных названий книг")
-    public List<String> getBookTitles() {
-
-        return titleTexts.texts();
     }
 
     @Step("Ввести значение в строку поиска")
@@ -64,5 +65,103 @@ public class BookCatalogPage {
     public int countActualRows() {
 
         return rows.size();
+    }
+
+    @Step("Убедиться, что пользователь успешно авторизовался")
+    public void checkUserIsLoggedIn() {
+        assertThat(userNameValue.getText()).isEqualTo(TestEnvironmentConfigurator.getConfig().login());
+    }
+
+    @Step("Отсортировать книги по названию")
+    public void sortBookItemsByTitle() {
+        titleButton.click();
+    }
+
+    @Step("Отсортировать книги по издательству")
+    public void sortBookItemsByPublisher() {
+        publisherButton.click();
+    }
+
+    @Step("Отсортировать книги по автору")
+    public void sortBookItemsByAuthor() {
+        authorButton.click();
+    }
+
+    @Step("Убедиться, что книги отсортированы по названию в алфавитном порядке")
+    public void checkBooksAreSortedAscendingByTitle() {
+        List<String> sortedTitles = sortAscending(titles);
+        Assertions.assertThat(titles).isEqualTo(sortedTitles);
+    }
+
+    @Step("Убедиться, что книги отсортированы по издательству в алфавитном порядке")
+    public void checkBooksAreSortedAscendingByPublisher() {
+        List<String> sortedPublishers = sortAscending(publishers);
+        Assertions.assertThat(publishers).isEqualTo(sortedPublishers);
+    }
+
+    @Step("Убедиться, что книги отсортированы по автору в алфавитном порядке")
+    public void checkBooksAreSortedAscendingByAuthor() {
+        List<String> sortedAuthors = sortAscending(authors);
+        Assertions.assertThat(authors).isEqualTo(sortedAuthors);
+    }
+
+    @Step("Убедиться, что книги отсортированы по названию в обратном алфавитном порядке")
+    public void checkBooksAreSortedDescendingByTitle() {
+        List<String> sortedTitles = sortDescending(titles);
+        Assertions.assertThat(titles).isEqualTo(sortedTitles);
+    }
+
+    @Step("Убедиться, что книги отсортированы по издательству в обратном алфавитном порядке")
+    public void checkBooksAreSortedDescendingByPublisher() {
+        List<String> sortedPublishers = sortDescending(publishers);
+        Assertions.assertThat(publishers).isEqualTo(sortedPublishers);
+    }
+
+    @Step("Убедиться, что книги отсортированы по автору в обратном алфавитном порядке")
+    public void checkBooksAreSortedDescendingByAuthor() {
+        List<String> sortedAuthors = sortDescending(authors);
+        Assertions.assertThat(authors).isEqualTo(sortedAuthors);
+    }
+
+    @Step("Получить список всех значений в нужном столбце")
+    public List<String> getTextFromCells(ElementsCollection cells) {
+        List<String> textList = new ArrayList<>();
+        for (SelenideElement cell : cells) {
+            String cellText = cell.getText().trim();
+            if (!cellText.isEmpty()) {
+                textList.add(cellText);
+            }
+        }
+
+        return textList;
+    }
+
+    @Step("Отсортировать список полученных строк в алфавитном порядке")
+    public List<String> sortAscending(List<String> items) {
+
+        return items.stream().sorted().collect(Collectors.toList());
+    }
+
+    @Step("Отсортировать список полученных строк в обратном алфавитном порядке")
+    public List<String> sortDescending(List<String> items) {
+
+        return items.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+    }
+
+    @Step("Убедиться, что в каталоге найдены книги по критерию")
+    public void checkBooksAreFilteredByTitle(String searchQuery) {
+
+        Assertions.assertThat(titles).allMatch(title -> title.contains(searchQuery));
+    }
+
+    @Step("Убедиться, что в каталоге найдены книги по критерию")
+    public void checkBooksAreFilteredByPublisher(String searchQuery) {
+        Assertions.assertThat(publishers).allMatch(publisher -> publisher.contains(searchQuery));
+    }
+
+    @Step("Убедиться, что в каталоге найдены книги по критерию")
+    public void checkBooksAreFilteredByAuthor(String searchQuery) {
+        List<String> authors = getTextFromCells(authorCells);
+        Assertions.assertThat(authors).allMatch(author -> author.contains(searchQuery));
     }
 }
