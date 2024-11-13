@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import ui.pages.BookCatalogPage;
 import ui.pages.LoginPage;
 import ui.pages.ProfilePage;
-import ui.steps.BookStoreUiSteps;
+import ui.steps.BrowserSteps;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("Выход из учетной записи и завершение сеанса пользователя")
 public class LogoutTests extends TestBase {
 
-    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
+    private final BrowserSteps browserSteps = new BrowserSteps();
     private final LoginPage loginPage = new LoginPage();
     private final ProfilePage profilePage = new ProfilePage();
     private final BookCatalogPage bookCatalogPage = new BookCatalogPage();
@@ -53,9 +53,9 @@ public class LogoutTests extends TestBase {
         loginPage.openLoginPage();
         Allure.step("Убедиться, что пользователь авторизован");
         assertThat(loginPage.getLoggedInMessage().getText()).isEqualTo(loginPage.getExpectedLoggedInMessage());
-        bookStoreUiSteps.openPageInAnotherTab(loginPage.getPath(), 1);
+        browserSteps.openPageInAnotherTab(loginPage.getPath(), 1);
         bookCatalogPage.clickLogoutButton();
-        bookStoreUiSteps.switchToAnotherTab(0);
+        browserSteps.switchToAnotherTab(0);
         loginPage.goToProfileFromLoginPageWhileLoggedIn();
         profilePage.checkNotLoggedInMessage();
     }

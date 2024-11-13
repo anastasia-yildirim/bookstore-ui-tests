@@ -2,10 +2,10 @@ package api.steps;
 
 import api.models.BookModel;
 import api.models.Session;
-import api.models.request.AddBookToProfileRequestModel;
-import api.models.response.AddBookToProfileResponseModel;
-import api.models.response.GetBooksFromProfileResponseModel;
-import api.models.response.GetBooksFromStoreResponseModel;
+import api.models.addbooks.AddBookToProfileRequestModel;
+import api.models.addbooks.AddBookToProfileResponseModel;
+import api.models.getbooks.GetBooksFromProfileResponseModel;
+import api.models.getbooks.GetBooksFromStoreResponseModel;
 import io.qameta.allure.Step;
 
 import java.util.List;

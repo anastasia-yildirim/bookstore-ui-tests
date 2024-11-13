@@ -7,7 +7,7 @@ import config.TestEnvironmentConfigurator;
 import io.qameta.allure.Step;
 import lombok.Data;
 import org.assertj.core.api.Assertions;
-import ui.steps.BookStoreUiSteps;
+import ui.steps.BrowserSteps;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Data
 public class BookCatalogPage {
 
-    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
+    private final BrowserSteps browserSteps = new BrowserSteps();
 
     private String path = "/books";
 

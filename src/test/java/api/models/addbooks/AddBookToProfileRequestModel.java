@@ -1,4 +1,4 @@
-package api.models.request;
+package api.models.addbooks;
 
 import api.models.BookModel;
 import lombok.Data;

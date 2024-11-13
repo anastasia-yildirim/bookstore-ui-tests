@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.switchTo;
 
-public class BookStoreUiSteps {
+public class BrowserSteps {
 
     @Step("Перейти в другую вкладку")
     public void switchToAnotherTab(int tabIndex) {
