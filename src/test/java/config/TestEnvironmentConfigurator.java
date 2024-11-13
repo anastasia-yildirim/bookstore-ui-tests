@@ -11,24 +11,26 @@ import java.util.Map;
 public class TestEnvironmentConfigurator {
 
     @Getter
-    private static final Config config = ConfigFactory.create(Config.class, System.getProperties());
+    private static final TestEnvConfig testEnvConfig = ConfigFactory.create(TestEnvConfig.class, System.getProperties());
+    @Getter
+    private static final BookStoreConfig bookStoreConfig = ConfigFactory.create(BookStoreConfig.class, System.getProperties());
 
     public TestEnvironmentConfigurator() {
         processConfig();
     }
 
     public void processConfig() {
-        Configuration.baseUrl = config.getBaseUrl();
-        RestAssured.baseURI = config.getBaseUrl();
+        Configuration.baseUrl = bookStoreConfig.getBaseUrl();
+        RestAssured.baseURI = bookStoreConfig.getBaseUrl();
 
-        Configuration.browser = config.browserName();
-        Configuration.browserVersion = config.browserVersion();
-        Configuration.browserSize = config.browserSize();
+        Configuration.browser = testEnvConfig.browserName();
+        Configuration.browserVersion = testEnvConfig.browserVersion();
+        Configuration.browserSize = testEnvConfig.browserSize();
 
         Configuration.pageLoadStrategy = "eager";
 
-        if (config.isRemote()) {
-            Configuration.remote = config.getRemoteUrl();
+        if (testEnvConfig.isRemote()) {
+            Configuration.remote = testEnvConfig.getRemoteUrl();
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.<String, Object>of(

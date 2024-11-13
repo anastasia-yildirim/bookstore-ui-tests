@@ -5,7 +5,7 @@ import api.models.auth.GenerateTokenRequestModel;
 import api.models.auth.GenerateTokenResponseModel;
 import api.models.request.LoginRequestModel;
 import api.models.response.LoginResponseModel;
-import config.Config;
+import config.BookStoreConfig;
 import io.qameta.allure.Step;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Cookie;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BookStoreAuthorizationApi {
 
-    private static final Config config = ConfigFactory.create(Config.class);
+    private static final BookStoreConfig config = ConfigFactory.create(BookStoreConfig.class);
 
     @Step("Сгенерировать токен")
     public static void generateToken() {

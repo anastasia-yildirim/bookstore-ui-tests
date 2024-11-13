@@ -15,7 +15,7 @@ public class BookStoreUiSteps {
 
     @Step("Открыть страницу в новой вкладке")
     public void openPageInAnotherTab(String pagePath, int tabIndex) {
-        executeJavaScript("window.open('" + TestEnvironmentConfigurator.getConfig().getBaseUrl() + pagePath
+        executeJavaScript("window.open('" + TestEnvironmentConfigurator.getBookStoreConfig().getBaseUrl() + pagePath
                 + "', '_blank');");
         switchTo().window(tabIndex);
     }

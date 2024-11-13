@@ -1,23 +1,12 @@
 package config;
 
-@Config.LoadPolicy(Config.LoadType.MERGE)
+@TestEnvConfig.LoadPolicy(TestEnvConfig.LoadType.MERGE)
 @org.aeonbits.owner.Config.Sources({
         "system:properties",
         "classpath:base.properties",
-        "classpath:auth.properties",
         "classpath:remote.properties"
 })
-public interface Config extends org.aeonbits.owner.Config {
-
-    @Key("baseUrl")
-    @DefaultValue("https://demoqa.com")
-    String getBaseUrl();
-
-    @Key("login")
-    String login();
-
-    @Key("password")
-    String password();
+public interface TestEnvConfig extends org.aeonbits.owner.Config {
 
     @Key("browser")
     @DefaultValue("chrome")

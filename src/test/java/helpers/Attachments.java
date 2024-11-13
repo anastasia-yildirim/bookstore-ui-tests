@@ -1,7 +1,7 @@
 package helpers;
 
 import com.codeborne.selenide.Selenide;
-import config.Config;
+import config.TestEnvConfig;
 import config.TestEnvironmentConfigurator;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
@@ -63,11 +63,11 @@ public class Attachments {
     }
 
     public static void generateDataForAllureReport() {
-        Config config = TestEnvironmentConfigurator.getConfig();
+        TestEnvConfig testEnvConfig = TestEnvironmentConfigurator.getTestEnvConfig();
 
         screenshotAs("Last screenshot");
         pageSource();
-        if (Objects.equals(config.browserName(), "chrome")) {
+        if (Objects.equals(testEnvConfig.browserName(), "chrome")) {
             browserConsoleLogs();
         }
         addVideo();

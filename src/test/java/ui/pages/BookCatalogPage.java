@@ -65,7 +65,7 @@ public class BookCatalogPage {
 
     @Step("Убедиться, что пользователь успешно авторизовался")
     public void checkUserIsLoggedIn() {
-        assertThat(userNameValue.getText()).isEqualTo(TestEnvironmentConfigurator.getConfig().login());
+        assertThat(userNameValue.getText()).isEqualTo(TestEnvironmentConfigurator.getBookStoreConfig().login());
     }
 
     @Step("Отсортировать книги по названию")

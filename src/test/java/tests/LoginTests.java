@@ -21,8 +21,8 @@ public class LoginTests extends TestBase {
     @Severity(SeverityLevel.BLOCKER)
     public void successfulLogin() {
         loginPage.openLoginPage();
-        loginPage.enterUserName(TestEnvironmentConfigurator.getConfig().login());
-        loginPage.enterPassword(TestEnvironmentConfigurator.getConfig().password());
+        loginPage.enterUserName(TestEnvironmentConfigurator.getBookStoreConfig().login());
+        loginPage.enterPassword(TestEnvironmentConfigurator.getBookStoreConfig().password());
         loginPage.clickLoginButton();
         bookCatalogPage.checkUserIsLoggedIn();
     }
@@ -34,7 +34,7 @@ public class LoginTests extends TestBase {
     public void unsuccessfulLoginWithInvalidUserName() {
         loginPage.openLoginPage();
         loginPage.enterUserName("invalid_login");
-        loginPage.enterPassword(TestEnvironmentConfigurator.getConfig().password());
+        loginPage.enterPassword(TestEnvironmentConfigurator.getBookStoreConfig().password());
         loginPage.clickLoginButton();
         loginPage.checkValidationMessage();
     }
@@ -45,7 +45,7 @@ public class LoginTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     public void unsuccessfulLoginWithInvalidPassword() {
         loginPage.openLoginPage();
-        loginPage.enterUserName(TestEnvironmentConfigurator.getConfig().login());
+        loginPage.enterUserName(TestEnvironmentConfigurator.getBookStoreConfig().login());
         loginPage.enterPassword("invalid_password");
         loginPage.clickLoginButton();
         loginPage.checkValidationMessage();
