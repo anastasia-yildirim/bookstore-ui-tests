@@ -37,10 +37,6 @@ public class BookCatalogPage {
     private ElementsCollection rows = $$(".rt-tr-group");
     private SelenideElement rowsCountOptionButton = $("select[aria-label='rows per page']");
 
-    private List<String> titles = titleTexts.texts();
-    private List<String> publishers = getTextFromCells(publisherCells);
-    private List<String> authors = getTextFromCells(authorCells);
-
     @Step("Открыть страницу каталога")
     public void openCatalogPage() {
         open(path);
@@ -89,36 +85,42 @@ public class BookCatalogPage {
 
     @Step("Убедиться, что книги отсортированы по названию в алфавитном порядке")
     public void checkBooksAreSortedAscendingByTitle() {
+        List<String> titles = titleTexts.texts();
         List<String> sortedTitles = sortAscending(titles);
         Assertions.assertThat(titles).isEqualTo(sortedTitles);
     }
 
     @Step("Убедиться, что книги отсортированы по издательству в алфавитном порядке")
     public void checkBooksAreSortedAscendingByPublisher() {
+        List<String> publishers = getTextFromCells(publisherCells);
         List<String> sortedPublishers = sortAscending(publishers);
         Assertions.assertThat(publishers).isEqualTo(sortedPublishers);
     }
 
     @Step("Убедиться, что книги отсортированы по автору в алфавитном порядке")
     public void checkBooksAreSortedAscendingByAuthor() {
+        List<String> authors = getTextFromCells(authorCells);
         List<String> sortedAuthors = sortAscending(authors);
         Assertions.assertThat(authors).isEqualTo(sortedAuthors);
     }
 
     @Step("Убедиться, что книги отсортированы по названию в обратном алфавитном порядке")
     public void checkBooksAreSortedDescendingByTitle() {
+        List<String> titles = titleTexts.texts();
         List<String> sortedTitles = sortDescending(titles);
         Assertions.assertThat(titles).isEqualTo(sortedTitles);
     }
 
     @Step("Убедиться, что книги отсортированы по издательству в обратном алфавитном порядке")
     public void checkBooksAreSortedDescendingByPublisher() {
+        List<String> publishers = getTextFromCells(publisherCells);
         List<String> sortedPublishers = sortDescending(publishers);
         Assertions.assertThat(publishers).isEqualTo(sortedPublishers);
     }
 
     @Step("Убедиться, что книги отсортированы по автору в обратном алфавитном порядке")
     public void checkBooksAreSortedDescendingByAuthor() {
+        List<String> authors = getTextFromCells(authorCells);
         List<String> sortedAuthors = sortDescending(authors);
         Assertions.assertThat(authors).isEqualTo(sortedAuthors);
     }
@@ -150,12 +152,13 @@ public class BookCatalogPage {
 
     @Step("Убедиться, что в каталоге найдены книги по критерию")
     public void checkBooksAreFilteredByTitle(String searchQuery) {
-
+        List<String> titles = titleTexts.texts();
         Assertions.assertThat(titles).allMatch(title -> title.contains(searchQuery));
     }
 
     @Step("Убедиться, что в каталоге найдены книги по критерию")
     public void checkBooksAreFilteredByPublisher(String searchQuery) {
+        List<String> publishers = getTextFromCells(publisherCells);
         Assertions.assertThat(publishers).allMatch(publisher -> publisher.contains(searchQuery));
     }
 
