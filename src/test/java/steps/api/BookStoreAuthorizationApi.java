@@ -23,7 +23,7 @@ public class BookStoreAuthorizationApi {
 
     @Step("Сгенерировать токен")
     public static void generateToken() {
-        GenerateTokenRequestModel bodyData = new GenerateTokenRequestModel(config.login(), config.password());
+        GenerateTokenRequestModel bodyData = new GenerateTokenRequestModel(config.password(), config.login());
 
         GenerateTokenResponseModel response =
                 given(bookStoreRequestSpec)
