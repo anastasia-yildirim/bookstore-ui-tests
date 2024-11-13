@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.ProfilePage;
 import steps.api.BookStoreApiSteps;
-import steps.ui.BookStoreUiSteps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProfileTests extends TestBase {
 
     private final BookStoreApiSteps bookStoreApiSteps = new BookStoreApiSteps();
-    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
     private final ProfilePage profilePage = new ProfilePage();
 
     @Test
@@ -46,8 +44,8 @@ public class ProfileTests extends TestBase {
         collectionOfIsbns = bookStoreApiSteps.addBookToIsbnCollection(isbn, collectionOfIsbns);
         books = bookStoreApiSteps.addBookToProfile(collectionOfIsbns, session);
         assertEquals(collectionOfIsbns, books);
-        bookStoreUiSteps.openPage(profilePage.getPath());
-        bookStoreUiSteps.deleteBookFromProfile(isbn);
+        profilePage.openProfilePage();
+        profilePage.deleteBookFromProfile(isbn);
         sleep(1000);
         //Assert
         Allure.step("Убедиться, что книга не отображается в интерфейсе");

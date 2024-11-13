@@ -29,10 +29,10 @@ public class LogoutTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @WithLogin
     public void successfulLogout() {
-        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
-        bookStoreUiSteps.clickLogoutButton();
+        bookCatalogPage.openCatalogPage();
+        bookCatalogPage.clickLogoutButton();
         Allure.step("Убедиться, что пользователь вышел из учетной записи");
-        softAssertions.assertThat(bookStoreUiSteps.getDisplayedPageTitle()).isEqualTo(loginPage.getExpectedPageTitle());
+        softAssertions.assertThat(loginPage.getDisplayedPageTitle()).isEqualTo(loginPage.getExpectedPageTitle());
         softAssertions.assertThat(loginPage.getLoggedInUserNameValue().isDisplayed()).isFalse();
         softAssertions.assertAll();
     }
@@ -43,11 +43,11 @@ public class LogoutTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @WithLogin
     public void sessionShouldBeExpiredAfterSuccessfulLogout() {
-        bookStoreUiSteps.openPage(bookCatalogPage.getPath());
-        bookStoreUiSteps.clickLogoutButton();
-        bookStoreUiSteps.openPage(profilePage.getPath());
+        bookCatalogPage.openCatalogPage();
+        bookCatalogPage.clickLogoutButton();
+        profilePage.openProfilePage();
         Allure.step("Убедиться, что сессия истекла");
-        assertThat(bookStoreUiSteps.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
+        assertThat(profilePage.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
     }
 
     @Test
@@ -56,14 +56,14 @@ public class LogoutTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @WithLogin
     public void multipleTabsLogoutTest() {
-        bookStoreUiSteps.openPage(loginPage.getPath());
+        loginPage.openLoginPage();
         Allure.step("Убедиться, что пользователь авторизован");
         assertThat(loginPage.getLoggedInMessage().getText()).isEqualTo(loginPage.getExpectedLoggedInMessage());
         bookStoreUiSteps.openPageInAnotherTab(loginPage.getPath(), 1);
-        bookStoreUiSteps.clickLogoutButton();
+        bookCatalogPage.clickLogoutButton();
         bookStoreUiSteps.switchToAnotherTab(0);
-        bookStoreUiSteps.goToProfileFromLoginPageWhileLoggedIn();
+        loginPage.goToProfileFromLoginPageWhileLoggedIn();
         Allure.step("Убедиться, что сессия истекла");
-        assertThat(bookStoreUiSteps.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
+        assertThat(profilePage.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
     }
 }

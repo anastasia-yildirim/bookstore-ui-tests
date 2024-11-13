@@ -4,7 +4,6 @@ import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.ProfilePage;
-import steps.ui.BookStoreUiSteps;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccessTests extends TestBase {
 
-    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
     private final ProfilePage profilePage = new ProfilePage();
 
     @Test
@@ -22,8 +20,8 @@ public class AccessTests extends TestBase {
     @Owner("@anastasiayildirim")
     @Severity(SeverityLevel.CRITICAL)
     public void shouldShowNotLoggedInMessageWhenVisitingProfileWithoutLoginTest() {
-        bookStoreUiSteps.openPage(profilePage.getPath());
+        profilePage.openProfilePage();
         Allure.step("Убедиться, отображается сообщение " + profilePage.getNotLoggedInText());
-        assertThat(bookStoreUiSteps.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
+        assertThat(profilePage.getNotLoggedInMessageDisplayed()).isEqualTo(profilePage.getNotLoggedInText());
     }
 }
