@@ -14,10 +14,10 @@ public class TestEnvironmentConfigurator {
     private static final Config config = ConfigFactory.create(Config.class, System.getProperties());
 
     public TestEnvironmentConfigurator() {
-        createWebDriver();
+        processConfig();
     }
 
-    public void createWebDriver() {
+    public void processConfig() {
         Configuration.baseUrl = config.getBaseUrl();
         RestAssured.baseURI = config.getBaseUrl();
 

@@ -14,7 +14,7 @@ public class TestBase {
 
     @BeforeAll
     public static void setUp() {
-        driver.createWebDriver();
+        driver.processConfig();
     }
 
     @AfterEach
