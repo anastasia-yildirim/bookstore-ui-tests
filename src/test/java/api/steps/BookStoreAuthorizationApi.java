@@ -1,11 +1,11 @@
-package steps.api;
+package api.steps;
 
-import models.Session;
+import api.models.Session;
 import io.qameta.allure.Step;
-import models.bookstore.request.GenerateTokenRequestModel;
-import models.bookstore.response.GenerateTokenResponseModel;
-import models.bookstore.request.LoginRequestModel;
-import models.bookstore.response.LoginResponseModel;
+import api.models.auth.GenerateTokenRequestModel;
+import api.models.auth.GenerateTokenResponseModel;
+import api.models.request.LoginRequestModel;
+import api.models.response.LoginResponseModel;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Cookie;
 
@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.BookStoreSpec.*;
+import static api.specs.BookStoreSpec.*;
 
 public class BookStoreAuthorizationApi {
 

@@ -4,10 +4,10 @@ import helpers.WithLogin;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.BookCatalogPage;
-import pages.LoginPage;
-import pages.ProfilePage;
-import steps.ui.BookStoreUiSteps;
+import ui.pages.BookCatalogPage;
+import ui.pages.LoginPage;
+import ui.pages.ProfilePage;
+import ui.steps.BookStoreUiSteps;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

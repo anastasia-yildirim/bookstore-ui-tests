@@ -3,12 +3,12 @@ package tests;
 import helpers.LoginExtension;
 import helpers.WithLogin;
 import io.qameta.allure.*;
-import models.Session;
-import models.bookstore.BookModel;
+import api.models.Session;
+import api.models.BookModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.ProfilePage;
-import steps.api.BookStoreApiSteps;
+import ui.pages.ProfilePage;
+import api.steps.BookStoreApiSteps;
 
 import java.util.ArrayList;
 import java.util.List;

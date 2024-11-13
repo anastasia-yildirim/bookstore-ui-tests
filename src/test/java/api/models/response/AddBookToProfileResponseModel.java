@@ -1,7 +1,7 @@
-package models.bookstore.response;
+package api.models.response;
 
 import lombok.Data;
-import models.bookstore.BookModel;
+import api.models.BookModel;
 
 import java.util.List;
 

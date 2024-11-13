@@ -1,4 +1,4 @@
-package models.bookstore.response;
+package api.models.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

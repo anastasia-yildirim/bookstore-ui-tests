@@ -1,4 +1,4 @@
-package models.bookstore.response;
+package api.models.auth;
 
 import lombok.Data;
 

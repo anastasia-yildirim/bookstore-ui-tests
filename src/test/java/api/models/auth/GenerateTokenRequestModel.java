@@ -1,4 +1,4 @@
-package models.bookstore.request;
+package api.models.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package pages;
+package ui.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -7,7 +7,7 @@ import config.TestEnvironmentConfigurator;
 import io.qameta.allure.Step;
 import lombok.Data;
 import org.assertj.core.api.Assertions;
-import steps.ui.BookStoreUiSteps;
+import ui.steps.BookStoreUiSteps;
 
 import java.util.ArrayList;
 import java.util.Comparator;

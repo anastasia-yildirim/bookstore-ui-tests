@@ -1,18 +1,18 @@
-package steps.api;
+package api.steps;
 
-import models.Session;
+import api.models.BookModel;
+import api.models.Session;
 import io.qameta.allure.Step;
-import models.bookstore.*;
-import models.bookstore.request.AddBookToProfileRequestModel;
-import models.bookstore.response.AddBookToProfileResponseModel;
-import models.bookstore.response.GetBooksFromProfileResponseModel;
-import models.bookstore.response.GetBooksFromStoreResponseModel;
+import api.models.request.AddBookToProfileRequestModel;
+import api.models.response.AddBookToProfileResponseModel;
+import api.models.response.GetBooksFromProfileResponseModel;
+import api.models.response.GetBooksFromStoreResponseModel;
 
 import java.util.List;
 import java.util.Random;
 
 import static io.restassured.RestAssured.given;
-import static specs.BookStoreSpec.*;
+import static api.specs.BookStoreSpec.*;
 
 public class BookStoreApiSteps {
 

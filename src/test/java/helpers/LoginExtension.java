@@ -1,10 +1,10 @@
 package helpers;
 
-import models.Session;
-import models.bookstore.response.LoginResponseModel;
+import api.models.Session;
+import api.models.response.LoginResponseModel;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import steps.api.BookStoreAuthorizationApi;
+import api.steps.BookStoreAuthorizationApi;
 
 public class LoginExtension implements BeforeEachCallback {
 

@@ -3,7 +3,7 @@ package tests;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.ProfilePage;
+import ui.pages.ProfilePage;
 
 @Epic("Книжный магазин DemoQA")
 @Feature("Авторизация пользователя")

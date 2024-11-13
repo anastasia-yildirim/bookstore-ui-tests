@@ -4,8 +4,8 @@ import config.TestEnvironmentConfigurator;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.BookCatalogPage;
-import pages.LoginPage;
+import ui.pages.BookCatalogPage;
+import ui.pages.LoginPage;
 
 @Epic("Книжный магазин DemoQA")
 @Feature("Авторизация пользователя")

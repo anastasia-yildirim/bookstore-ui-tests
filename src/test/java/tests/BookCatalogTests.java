@@ -7,8 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import pages.BookCatalogPage;
-import steps.ui.BookStoreUiSteps;
+import ui.pages.BookCatalogPage;
+import ui.steps.BookStoreUiSteps;
 import testdata.enums.Publisher;
 import testdata.enums.RowsCountOption;
 

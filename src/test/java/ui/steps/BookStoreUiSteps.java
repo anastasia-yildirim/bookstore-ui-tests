@@ -1,4 +1,4 @@
-package steps.ui;
+package ui.steps;
 
 import config.TestEnvironmentConfigurator;
 import io.qameta.allure.Step;
