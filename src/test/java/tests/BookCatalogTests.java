@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import pages.BookCatalogPage;
 import steps.ui.BookStoreUiSteps;
 import testdata.enums.Publisher;
 import testdata.enums.RowsCountOption;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BookCatalogTests extends TestBase {
 
     private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
-    private final BookCatalogPage bookCatalogPage = new BookCatalogPage();
+    //private final BookCatalogPage bookCatalogPage = new BookCatalogPage();
 
     @Test
     @DisplayName("Сортировка книг в каталоге по названию в алфавитном порядке")
