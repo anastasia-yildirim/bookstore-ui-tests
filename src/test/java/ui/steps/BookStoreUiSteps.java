@@ -19,11 +19,4 @@ public class BookStoreUiSteps {
                 + "', '_blank');");
         switchTo().window(tabIndex);
     }
-
-
-    @Step("Посчитать максимально возможное количество строк")
-    public int countMaxRows(String selectedOption) {
-
-        return Integer.parseInt(selectedOption.replaceAll("[^0-9]", ""));
-    }
 }

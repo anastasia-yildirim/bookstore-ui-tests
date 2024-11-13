@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import testdata.enums.Publisher;
 import testdata.enums.RowsCountOption;
 import ui.pages.BookCatalogPage;
-import ui.steps.BookStoreUiSteps;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Story("Поиск, фильтрация и сортировка книг в каталоге")
 public class BookCatalogTests extends TestBase {
 
-    private final BookStoreUiSteps bookStoreUiSteps = new BookStoreUiSteps();
     private final BookCatalogPage bookCatalogPage = new BookCatalogPage();
 
     @Test
@@ -139,7 +137,7 @@ public class BookCatalogTests extends TestBase {
         bookCatalogPage.openCatalogPage();
         String selectedOption = option.getOptionName();
         bookCatalogPage.changeAmountOfRowsOnCatalogPage(selectedOption);
-        int maxRowsCount = bookStoreUiSteps.countMaxRows(selectedOption);
+        int maxRowsCount = bookCatalogPage.countMaxRows(selectedOption);
         int actualRowsCount = bookCatalogPage.countActualRows();
         Allure.step("Убедиться, что количество строк, отображаемых в каталоге, равно выбранному значению или меньше");
         assertTrue(actualRowsCount <= maxRowsCount, "Actual count should be less than or equal to max count");
